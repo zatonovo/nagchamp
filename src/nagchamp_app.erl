@@ -10,6 +10,9 @@
 %% ===================================================================
 
 start(_StartType, _StartArgs) ->
+  Args = [ {port, port()}, {public, "priv/static"},
+    {sessions, [{cookies, []}]} ],
+  axiom_handler:start(Args),
   Pid = nagchamp_sup:start_link(),
   UrlList = case os:getenv("NAGCHAMP_TARGETS") of
     false -> ["http://me-meme.com"];
@@ -24,3 +27,12 @@ start(_StartType, _StartArgs) ->
 
 stop(_State) ->
     ok.
+
+
+port() ->
+  case os:getenv("PORT") of
+    false -> 9000;
+    Other ->
+      list_to_integer(Other)
+  end.
+

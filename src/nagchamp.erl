@@ -6,4 +6,7 @@ start() ->
   ok = application:start(compiler),
   ok = application:start(goldrush),
   ok = application:start(lager),
+  ok = application:start(crypto),
+  ok = application:start(ranch),
+  ok = application:start(cowboy),
   ok = application:start(nagchamp).
