@@ -8,7 +8,7 @@
 -record(state, {jobs=#{} }).
 
 start_link() -> 
-  gen_server:start_link(?MODULE, []).
+  gen_server:start_link({local,?MODULE}, ?MODULE, [], []).
 
 start_job(Job, Delay) -> 
   gen_server:call(?MODULE, {start, Job, Delay}).
