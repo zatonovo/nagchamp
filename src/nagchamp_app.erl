@@ -10,7 +10,7 @@
 %% ===================================================================
 
 start(_StartType, _StartArgs) ->
-  nagchamp_sup:start_link(),
+  Pid = nagchamp_sup:start_link(),
   UrlList = case os:getenv("NAGCHAMP_TARGETS") of
     false -> ["http://me-meme.com"];
     L -> L
@@ -19,7 +19,8 @@ start(_StartType, _StartArgs) ->
     false -> 60000;
     V -> V
   end,
-  [ champ:start_job(Url, Delay) || Url <- UrlList ].
+  [ champ:start_job(Url, Delay) || Url <- UrlList ],
+  Pid.
 
 stop(_State) ->
     ok.
