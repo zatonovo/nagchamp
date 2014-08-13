@@ -25,6 +25,7 @@ init(_Args) ->
   {ok, #state{}}.
 
 handle_cast({stop, JobId}, #state{jobs=OldJobs}=State) ->
+  lager:info("[~p] Stopping job ~p",[?MODULE,JobId]),
   Jobs = try
     TRef = maps:get(JobId, OldJobs),
     timer:cancel(TRef),
@@ -36,6 +37,7 @@ handle_cast({stop, JobId}, #state{jobs=OldJobs}=State) ->
   {noreply, State#state{jobs=Jobs}}.
 
 handle_call({start,Url,Delay}, _From, #state{jobs=OldJobs}=State) ->
+  lager:info("[~p] Starting job for ~p every ~p ms",[?MODULE,Url,Delay]),
   JobId = integer_to_binary(p_seconds(now())),
   TRef = pinger:make_request(Url, Delay),
   Jobs = maps:put(JobId,TRef, OldJobs),

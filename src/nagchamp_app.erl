@@ -18,6 +18,7 @@ start(_StartType, _StartArgs) ->
     false -> ["http://me-meme.com"];
     L -> string:tokens(L,",")
   end,
+  lager:info("[~p] Got targets: ~p", [?MODULE,UrlList]),
   Delay = case os:getenv("NAGCHAMP_DELAY") of
     false -> 60000;
     V -> V
