@@ -16,7 +16,9 @@ start(_StartType, _StartArgs) ->
   Pid = nagchamp_sup:start_link(),
   UrlList = case os:getenv("NAGCHAMP_TARGETS") of
     false -> ["http://me-meme.com"];
-    L -> string:tokens(L,",")
+    L -> 
+      lager:info("[~p] Raw targets: ~p", [?MODULE,L]),
+      string:tokens(L,",")
   end,
   lager:info("[~p] Got targets: ~p", [?MODULE,UrlList]),
   Delay = case os:getenv("NAGCHAMP_DELAY") of
