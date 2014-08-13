@@ -16,7 +16,7 @@ start(_StartType, _StartArgs) ->
   Pid = nagchamp_sup:start_link(),
   UrlList = case os:getenv("NAGCHAMP_TARGETS") of
     false -> ["http://me-meme.com"];
-    L -> L
+    L -> string:tokens(L,",")
   end,
   Delay = case os:getenv("NAGCHAMP_DELAY") of
     false -> 60000;
