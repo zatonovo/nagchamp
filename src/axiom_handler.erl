@@ -7,4 +7,5 @@ start(Args) ->
   axiom:start(?MODULE, Args).
 
 handle(<<"GET">>, [], Request) ->
+  lager:info("[~p] Ping",[?MODULE]),
   "ok".
