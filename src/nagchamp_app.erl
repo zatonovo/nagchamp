@@ -15,7 +15,7 @@ start(_StartType, _StartArgs) ->
   axiom_handler:start(Args),
   Pid = nagchamp_sup:start_link(),
   UrlList = case os:getenv("NAGCHAMP_TARGETS") of
-    false -> ["http://me-meme.com"];
+    false -> [];
     L -> 
       lager:info("[~p] Raw targets: ~p", [?MODULE,L]),
       string:tokens(L,",")
