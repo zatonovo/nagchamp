@@ -18,7 +18,7 @@ stop_job(JobId) ->
   gen_server:cast(?MODULE, {stop, JobId}).
 
 list() ->
-  gen_server:cast(?MODULE, list).
+  gen_server:call(?MODULE, list).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% PRIVATE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 p_seconds({_M,S,U}) ->
@@ -49,7 +49,7 @@ handle_call({start,Url,Delay}, _From, #state{jobs=OldJobs}=State) ->
 
 handle_call(list, _From, #state{jobs=Jobs}=State) ->
   Keys = maps:keys(Jobs),
-  {reply, Keys, State#state{jobs=Jobs} }.
+  {reply, Keys, State}.
 
 handle_info(_Info, State) ->
   {noreply, State}.

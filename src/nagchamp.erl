@@ -2,6 +2,7 @@
 -export([start/0]).
 
 start() -> 
+  application:set_env(lager, error_logger_hwm, 200, [{persistent,true}]),
   ok = application:start(syntax_tools),
   ok = application:start(compiler),
   ok = application:start(goldrush),

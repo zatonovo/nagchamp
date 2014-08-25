@@ -8,4 +8,8 @@ start(Args) ->
 
 handle(<<"GET">>, [], Request) ->
   lager:info("[~p] Ping",[?MODULE]),
+  "ok";
+
+
+handle(<<"GET">>, [<<"rest">>,<<"jobs">>], Request) ->
   "ok".
