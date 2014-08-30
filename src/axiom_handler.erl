@@ -8,7 +8,7 @@ start(Args) ->
 
 handle(<<"GET">>, [], Request) ->
   lager:info("[~p] Ping",[?MODULE]),
-  "ok";
+  axiom:dtl(main, [{name,<<"brian">>}]);
 
 handle(<<"GET">>, [<<"rest">>, <<"jobs">>], Request) ->
   champ:list();

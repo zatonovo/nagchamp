@@ -1,0 +1,19 @@
+<html>
+<head>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+</head>
+<body>
+Hello, {{ name }}
+<div class="container">
+<div class="panel">
+<div class="panel-heading">
+<button class="btn btn-default jobs">Jobs</button>
+</div>
+<div class="panel-body"></div>
+</div>
+</div>
+<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="nagchamp.js"></script>
+</body>
+</html>
