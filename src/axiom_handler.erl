@@ -10,6 +10,11 @@ handle(<<"GET">>, [], Request) ->
   lager:info("[~p] Ping",[?MODULE]),
   axiom:dtl(main, [{name,<<"brian">>}]);
 
+handle(<<"GET">>, [<<"ping">>], Request) ->
+  {_M,S,U} = now(),
+  Now = integer_to_binary(S*1000000 + U),
+  <<"[",Now/binary,"] pong">>;
+
 handle(<<"GET">>, [<<"rest">>, <<"jobs">>], Request) ->
   champ:list();
 
