@@ -10,8 +10,10 @@ make_request(Url, Delay) ->
 
 ping(Url) ->
   lager:info("[~p] Sending request to ~p", [self(), Url]),
-  try 
-    {ok, _Result} = httpc:request(Url)
+  try
+    Now = now(),
+    {Time, _} = timer:tc(httpc, request, [Url]),
+    persistence:put(Url, Now, Time)
   catch _:Error ->
     lager:warning("[~p] Unexpected response: ~p", [self(), Error])
   end.

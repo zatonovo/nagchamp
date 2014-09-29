@@ -24,8 +24,12 @@ list() ->
 p_seconds({_M,S,U}) ->
   S*1000000 + U.
 
+init_table() ->
+  ets:new(timings, [bag, public, named_table]).
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% GEN_SERVER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 init(_Args) ->
+  init_table(),
   {ok, #state{}}.
 
 handle_cast({stop, JobId}, #state{jobs=OldJobs}=State) ->
