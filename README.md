@@ -70,3 +70,13 @@ persistence:put(Url, TimeStamp, Duration) ->
     _ ->
   end.
 
+Week 8
+======
+Write out to file.
+
+persistence:export(Filename, Handler)
+
+persistence:export(Handler)
+
+
+

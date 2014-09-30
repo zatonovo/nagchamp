@@ -20,8 +20,7 @@ handle(<<"GET">>, [<<"rest">>, <<"jobs">>], Request) ->
 
 handle(<<"GET">>, [<<"rest">>, <<"job">>, Url, Delay], Request) ->
   StringUrl = binary_to_list(<<"http://", Url/binary>>),
-  champ:start_job(StringUrl, binary_to_integer(Delay)),
-  "ok";
+  champ:start_job(StringUrl, binary_to_integer(Delay));
 
 handle(<<"GET">>, [<<"rest">>, <<"job">>, JobId], Request) ->
   champ:stop_job(JobId),
