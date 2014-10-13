@@ -3,14 +3,41 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
 </head>
 <body>
-Hello, {{ name }}
 <div class="container">
-<div class="panel">
-<div class="panel-heading">
-<button class="btn btn-default jobs">Jobs</button>
+<div class="row">
+<div class="col-md-8">&nbsp;</div>
+<div class="col-md-4">
+<!-- Button trigger modal -->
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Add job
+</button>
 </div>
-<div class="panel-body"></div>
 </div>
+
+<div class="row">
+<div class="jobs panel panel-body"></div>
+</div>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add new job</h4>
+      </div>
+      <div class="modal-body">
+URL: <input type="text" class="job-url form-control">
+Delay (ms): <input type="text" class="job-delay form-control">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="job-submit btn btn-primary">Start job!</button>
+      </div>
+    </div>
+  </div>
 </div>
 <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

@@ -16,7 +16,7 @@ handle(<<"GET">>, [<<"ping">>], Request) ->
   <<"[",Now/binary,"] pong">>;
 
 handle(<<"GET">>, [<<"rest">>, <<"jobs">>], Request) ->
-  champ:list();
+  jiffy:encode(champ:list());
 
 handle(<<"GET">>, [<<"rest">>, <<"job">>, Url, Delay], Request) ->
   StringUrl = binary_to_list(<<"http://", Url/binary>>),
