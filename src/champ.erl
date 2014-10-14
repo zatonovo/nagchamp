@@ -44,6 +44,7 @@ handle_cast({stop, JobId}, #state{jobs=OldJobs}=State) ->
   end,
   {noreply, State#state{jobs=Jobs}}.
 
+%% TODO: Store jobs locally for display purposes
 handle_call({start,Url,Delay}, _From, #state{jobs=OldJobs}=State) ->
   lager:info("[~p] Starting job for ~p every ~p ms",[?MODULE,Url,Delay]),
   JobId = integer_to_binary(p_seconds(now())),
