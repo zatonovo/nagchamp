@@ -1,5 +1,5 @@
 -module(activemq_pinger).
--export([make_request/2, ping/1]).
+-export([make_request/2, ping/2]).
 
 make_request(Url, Delay) ->
   lager:info("[~p] Sending message to ~p", [self(), Url]),
