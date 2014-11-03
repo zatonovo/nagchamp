@@ -9,6 +9,20 @@ function load_jobs() {
    jQuery.ajax("/rest/jobs", { success: success_fn })
 }
 
+function stop_job(e) {
+  jQuery.ajax("/rest/job/"+job_id, { success: function(e) {
+    $(".jobs .job-"+job_id+" button").text("Start job")
+    $(".jobs .job-"+job_id+" button").click(start_job)
+  } })
+}
+
+function start_job(e) {
+  jQuery.ajax("/rest/job/"+job_id, { success: function(e) {
+    $(".jobs .job-"+job_id+" button").text("Stop job")
+    $(".jobs .job-"+job_id+" button").click(stop_job)
+  } })
+}
+
 function display_job(job_id, url, delay, type) {
   $(".jobs").append('<div class="row job-'+job_id+'">')
   $(".jobs .job-"+job_id)
@@ -18,19 +32,15 @@ function display_job(job_id, url, delay, type) {
     .append('<div class="col-md-2">'+delay+' ms</div>')
     .append('<div class="col-md-2">'+
       '<button type="button" class="btn btn-default">Stop job</button></div>')
-  $(".jobs .job-"+job_id+" button").click(function(e) {
-    jQuery.ajax("/rest/job/"+job_id, { success: function(e) {
-      $(".jobs .job-"+job_id+" button").text("Start job")
-    } })
-
-  })
+  $(".jobs .job-"+job_id+" button").click(stop_job)
 }
 
 function add_job() {
+   var type = $(".job-type").val()
    var url = $(".job-url").val()
    var delay = $(".job-delay").val()
-   jQuery.ajax("/rest/job/"+url+"/"+delay, { 
-     success: function(job_id) { display_job(job_id, url, delay) }
+   jQuery.ajax("/rest/job/"+type+"/"+url+"/"+delay, { 
+     success: function(job_id) { display_job(job_id, type, url, delay) }
     })
 }
 

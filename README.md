@@ -72,7 +72,8 @@ persistence:put(Url, TimeStamp, Duration) ->
 
 Week 8
 ======
-Write out to file.
++ Implement format handlers
++ Write out to file
 
 persistence:export(Filename, Handler)
 
@@ -81,5 +82,20 @@ persistence:export(Handler)
 
 Week 9
 ======
++ Add GUI
 
+Week 10
+=======
++ Update champ:list() to return more details of job
++ Add handler to initiate different types of jobs (e.g. erlstomp for ActiveMQ)
+
+Modify champ to include a Type argument to start_job. The allowed types
+are url and activemq. Add a lookup table to champ to manage the modules
+available for each ping type. In our case, this is 
+```
+Handlers = #{ url => url_pinger, activemq => activemq_pinger }
+```
+
+The original pinger.erl needs to be moved to url_pinger.erl and then
+the handle_call({start, ...}, ...) job updated to use the lookup table.
 

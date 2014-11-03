@@ -34,6 +34,7 @@
         <h4 class="modal-title" id="myModalLabel">Add new job</h4>
       </div>
       <div class="modal-body">
+Job Type: <input type="text" class="job-type form-control">
 URL: <input type="text" class="job-url form-control">
 Delay (ms): <input type="text" class="job-delay form-control">
       </div>
