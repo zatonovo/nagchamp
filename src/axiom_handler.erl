@@ -18,13 +18,13 @@ handle(<<"GET">>, [<<"ping">>], Request) ->
 handle(<<"GET">>, [<<"rest">>, <<"jobs">>], Request) ->
   jiffy:encode(champ:list());
 
-handle(<<"GET">>, [<<"rest">>, <<"job">>, url, Url, Delay], Request) ->
+handle(<<"GET">>, [<<"rest">>, <<"job">>, <<"url">>, Url, Delay], Request) ->
   StringUrl = binary_to_list(<<"http://", Url/binary>>),
   champ:start_job(StringUrl, binary_to_integer(Delay), url);
 
-handle(<<"GET">>, [<<"rest">>, <<"job">>, Type, Url, Delay], Request) ->
+handle(<<"GET">>, [<<"rest">>, <<"job">>, <<"activemq">>, Url, Delay], Request) ->
   StringUrl = binary_to_list(Url),
-  champ:start_job(StringUrl, binary_to_integer(Delay), url);
+  champ:start_job(StringUrl, binary_to_integer(Delay), activemq);
 
 handle(<<"GET">>, [<<"rest">>, <<"job">>, JobId], Request) ->
   champ:stop_job(JobId),

@@ -53,6 +53,7 @@ handle_call({start,Url,Delay, Type}, _From, #state{jobs=OldJobs}=State) ->
     [?MODULE,Type,Url,Delay]),
   JobId = integer_to_binary(p_seconds(now())),
   Module = maps:get(Type, State#state.handlers),
+  lager:info("[~p] Got module ~p", [?MODULE, Module]),
   {ok,TRef} = Module:make_request(Url, Delay),
   Jobs = maps:put(JobId,TRef, OldJobs),
   {reply, JobId, State#state{jobs=Jobs} };
