@@ -3,14 +3,20 @@
 
 make_request(Url, Delay) ->
   lager:info("[~p] Sending message to ~p", [self(), Url]),
-  [Host,Port,Topic] = binary:split(Url, [<<":">>, <<"/">>], [global]),
-  Fun = fun(Msg) ->
-      lager:info("~p", Msg)
+  [Host,BPort,Queue] = binary:split(Url, [<<":">>, <<"/">>], [global]),
+  Fun = fun(Payload) ->
+      {_M,S,U} = now(),
+      Now = S * 1000000 + U,
+      Then = list_to_integer(Payload),
+      lager:info("Latency: ~p", Now - Then)
   end,
-  {ok, Pid} = stomp_client:start(binary_to_list(Host), binary_to_integer(Port),"","",Fun),
-  stomp_client:subscribe_topic(binary_to_list(Topic), [], Pid),
-  timer:apply_interval(Delay, ?MODULE, ping, [binary_to_list(Topic), Pid]).
+  Port = binary_to_integer(BPort),
+  {ok, Pid} = stomp_client:start(binary_to_list(Host), Port,"","",Fun),
+  stomp_client:subscribe_queue(binary_to_list(Queue), [], Pid),
+  timer:apply_interval(Delay, ?MODULE, ping, [binary_to_list(Queue), Pid]).
 
-ping(Topic, Pid) ->
-  stomp_client:send_topic(Topic, "ping!", [], Pid).
+ping(Queue, Pid) ->
+  {_M,S,U} = now(),
+  Payload = integer_to_list(S * 1000000 + U),
+  stomp_client:send_queue(Queue, Payload, [], Pid).
 

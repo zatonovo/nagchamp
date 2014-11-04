@@ -99,3 +99,6 @@ Handlers = #{ url => url_pinger, activemq => activemq_pinger }
 The original pinger.erl needs to be moved to url_pinger.erl and then
 the handle_call({start, ...}, ...) job updated to use the lookup table.
 
+Week 11
+=======
++ Add timestamp to message to collect afterward
